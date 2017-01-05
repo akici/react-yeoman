@@ -6,8 +6,34 @@ class UserEdit extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {selectedUser: this.props.user};
+        this.state = {
+            selectedUser: null
+        };
+
+        console.log("const");
     }
+
+
+    componentWillMount() {
+        console.log("Mount");
+
+        this.setState({
+            selectedUser: this.props.user
+        });
+    }
+
+    //props u state e cevirir
+
+    componentWillReceiveProps(nextProps){
+
+        console.log(' componentWillReceiveProps : ', nextProps);
+
+        this.setState({
+            selectedUser: this.props.user
+        });
+
+    }
+
 
     render() {
         console.log(this.state.selectedUser);

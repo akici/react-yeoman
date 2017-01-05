@@ -6,6 +6,9 @@
 import React from 'react';
 
 const UserDetail = ({user, onUserEdit}) => {
+
+    console.log('userDetail: ', onUserEdit);
+
     if(!user) {
         return (
             <div className="user-detail">
@@ -18,7 +21,7 @@ const UserDetail = ({user, onUserEdit}) => {
             <p>Name: {user.name}</p>
             <p>Address: {user.address}</p>
             <p>Age: {user.age}</p>
-            <button onClick={() => onUserEdit(true)}>Edit</button>
+            <button onClick={() => onUserEdit({showUserEdit: true})}>Edit</button>
         </div>
     );
 };

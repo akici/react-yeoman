@@ -6,6 +6,7 @@ import UserList from './UserList';
 import UserDetail from './UserDetail';
 import UserEdit from './UserEdit';
 
+
 class AppComponent extends Component {
  
     constructor(props) {
@@ -15,26 +16,36 @@ class AppComponent extends Component {
             selectedUser: null,
             showUserEdit: false
         };
+        console.log('Const');
+    }
+
+    componentWillMount() {
+        console.log('Will Mount');
         this.getUsers();
     }
 
+    componentDidMount() {
+        console.log('Mount');
+    }
+
     getUsers() {
+
         let users = [
             {id: 1, name: 'Ayberk Akici', address: 'Reinickendorfer Str. 49', age: 32},
             {id: 2, name: 'Ersin Keser', address: 'Tempelhofer Damm 36', age: 34}
         ];
+
         setTimeout( () => {
             this.setState({
                 users: users,
                 selectedUser: users[0]
             });
-        }, 10);
+        }, 1000);
     }
 
-    selectUser(selectedUser) {
-        this.setState({selectedUser});
-        this.setState({showUserEdit: false});
-    }
+
+
+
 
     render() {
 
@@ -43,9 +54,12 @@ class AppComponent extends Component {
         return (
                 <div>
                     <UserList users={this.state.users}
-                              onUserSelect={selectedUser => this.selectUser(selectedUser)} />
+                              onUserSelect={(selectedUser) => {
+                                  this.setState({selectedUser});
+                                  this.setState({showUserEdit: false});
+                              }} />
                     <UserDetail user={this.state.selectedUser}
-                                onUserEdit={showUserEdit => this.setState({showUserEdit})} />
+                                onUserEdit={this.setState.bind(this)} />
                     {
                      this.state.showUserEdit ? <UserEdit user={this.state.selectedUser} /> : null
                     }
